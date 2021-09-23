@@ -4,7 +4,6 @@
 
     echo session_id();
 
-    echo $nome;
     echo $_SESSION["nome"];
 
 

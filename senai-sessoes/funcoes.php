@@ -12,7 +12,7 @@ function lerArquivo($nomeArquivo){
 function realizarLogin($usuario, $senha, $dados){
     
     foreach ($dados as $dado) {
-        if ($dado->usario == $usuario && $dado->senha == $senha) {
+        if ($dado->usuario == $usuario && $dado->senha == $senha) {
             
             //variáves de sessão
             $_SESSION["usuario"] = $dado->usuario;
@@ -22,13 +22,28 @@ function realizarLogin($usuario, $senha, $dados){
             header("location: area_restrita.php");
             exit;
 
-        } else {
-           header("location: index.php");
-           exit;
-        }
+        } 
         
     }
 
+    header("location: index.php");
+
+}
+
+function verificarLogin(){
+
+    if(($_SESSION["id"] != session_id()) || (empty($_SESSION["id"]))){
+        header("location: index.php");
+    }
+
+}
+
+function finalizarLogin()
+{
+    session_unset(); //limpa todas as variáveis de sessão
+    session_destroy();
+
+    header("location: index.php");
 }
 
 ?>

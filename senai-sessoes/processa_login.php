@@ -2,11 +2,20 @@
 
 session_start();
 
-require("./funcoes.php");
+require_once("./funcoes.php");
 
-$usuario = $_POST["txt_usuario"];
-$senha = $_POST["txt_senha"];
+if (isset($_POST["txt_usuario"]) && isset($_POST["txt_senha"])){
 
-realizarLogin($usuario, $senha, lerArquivo("./dados/usuarios.json"));
+    $usuario = $_POST["txt_usuario"];
+    $senha = $_POST["txt_senha"];
+
+    realizarLogin($usuario, $senha, lerArquivo("./dados/usuarios.json"));
+} elseif ($_GET["logout"]) {
+    
+    finalizarLogin();
+
+}
+
+
 
 ?>
